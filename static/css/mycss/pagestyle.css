@@ -1,0 +1,25 @@
+body {
+    /*background: url("/static/images/cielo.jpeg");*/
+    background: rgb(65,239,255);
+    background: linear-gradient(90deg, rgba(65,239,255,1) 0%, rgba(143,255,251,0.9072681704260652) 0%, rgba(0,212,255,1) 100%);
+}
+.icon-loading {
+    columns: white;
+    fill: currentColor;
+    display: none;
+}
+.icon-warning {
+    color: #856404;
+    fill: currentColor;
+}
+.rotate {
+    animation: rotation 1.5s infinite linear;
+}
+@keyframes rotation {
+    from {
+      transform: rotate(359deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+}

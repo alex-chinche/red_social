@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/mycss/pagestyle.css' %}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>imagen</title>
+</head>
+
+<body>
+    <h1>Imagen</h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+        Register
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Register:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Fields to complete for register -->
+                    <form id="register-form" action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="user-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="user-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-surname" class="col-form-label">Surnames:</label>
+                            <input type="text" class="form-control" id="user-surname">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-birthday" class="col-form-label">Birthday:</label>
+                            <input type="date" class="form-control" id="user-birthday">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="user-email">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="user-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password-re" class="col-form-label">Confirm password:</label>
+                            <input type="password" class="form-control" id="user-confirm-password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="register-button" form="register-form" class="btn btn-primary">
+                        <svg class="icon-loading" viewBox="0 0 16 16" width="16" height="16">
+                            <path fill-rule="evenodd"
+                                d="M8 2.5a5.487 5.487 0 00-4.131 1.869l1.204 1.204A.25.25 0 014.896 6H1.25A.25.25 0 011 5.75V2.104a.25.25 0 01.427-.177l1.38 1.38A7.001 7.001 0 0114.95 7.16a.75.75 0 11-1.49.178A5.501 5.501 0 008 2.5zM1.705 8.005a.75.75 0 01.834.656 5.501 5.501 0 009.592 2.97l-1.204-1.204a.25.25 0 01.177-.427h3.646a.25.25 0 01.25.25v3.646a.25.25 0 01-.427.177l-1.38-1.38A7.001 7.001 0 011.05 8.84a.75.75 0 01.656-.834z">
+                            </path>
+                        </svg>
+                        Register</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/myjs/register.js' %}"></script>
+</body>
+
+</html>
