@@ -12,6 +12,10 @@ body {
     color: #856404;
     fill: currentColor;
 }
+.icon-check {
+    color: #146300;
+    fill: currentColor;
+}
 .rotate {
     animation: rotation 1.5s infinite linear;
 }

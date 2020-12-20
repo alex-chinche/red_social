@@ -8,8 +8,8 @@ class UserForm(forms.Form):
     surnames = forms.CharField(max_length=30)
     birthday = forms.DateField()
     email = forms.EmailField()
-    password = forms.CharField(max_length=100)
-    confirmPassword = forms.CharField(max_length=100)
+    password = forms.CharField(max_length=50)
+    confirmPassword = forms.CharField(max_length=50)
 
     def clean(self):
         cleaned_data = self.cleaned_data

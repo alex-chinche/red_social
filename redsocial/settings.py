@@ -119,6 +119,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Email variables
+
+EMAIL_HOST = "smtp.googlemail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "alexrodriguez1995.arg@gmail.com"
+EMAIL_HOST_PASSWORD = "tirapedos"
+
+# Static variables
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
