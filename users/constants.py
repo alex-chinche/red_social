@@ -1,0 +1,1 @@
+SOCIAL_NETWORK_NAME = "Certy"
