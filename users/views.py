@@ -11,10 +11,18 @@ from django.utils.crypto import get_random_string
 from django.http import HttpResponse
 from .coders.token import encode_token, decode_token, hash_password
 import hashlib
+from .login_validators import auth_required
 
 
 def main(request):
+    token = request.COOKIES.get('auth_token')
+    print(token)
     return render(request, 'main.html')
+
+
+@auth_required
+def home(request):
+    return render(request, 'home.html')
 
 
 def register(request):
@@ -63,9 +71,9 @@ def register(request):
 
 def confirm_email(request, token):
     try:
-        decoded_token = decode_token(token.encode('UTF-8'))
+        encoded_token = decode_token(token.encode('UTF-8'))
         user_to_verify = User.objects.get(
-            email=decoded_token['email'], password=decoded_token['password'])
+            email=encoded_token['email'], password=encoded_token['password'])
         if user_to_verify.verified == False:
             user_to_verify.verified = True
             user_to_verify.save()

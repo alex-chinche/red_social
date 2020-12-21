@@ -40,11 +40,12 @@ $(document).ready(function () {
                     $('#login-button svg').hide();
                 }
                 else if (json['login'] == true) {
-                    document.cookie = 'auth_token=' + json['token'];
+                    document.cookie = 'auth_token=' + json['token'] + ';Secure; SameSite=Lax';
                     $('#loginModal').modal('hide')
                     $('#login-button svg').removeClass('rotate');
                     $('#login-button').prop("disabled", false);
                     $('#login-button svg').hide();
+                    document.location.href = "/home";
                 }
             },
 
