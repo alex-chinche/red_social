@@ -36,28 +36,28 @@
                     <form id="register-form" action="#" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="user-name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="user-name">
+                            <label for="register-user-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="register-user-name">
                         </div>
                         <div class="form-group">
-                            <label for="user-surname" class="col-form-label">Surnames:</label>
-                            <input type="text" class="form-control" id="user-surname">
+                            <label for="register-user-surname" class="col-form-label">Surnames:</label>
+                            <input type="text" class="form-control" id="register-user-surname">
                         </div>
                         <div class="form-group">
-                            <label for="user-birthday" class="col-form-label">Birthday:</label>
-                            <input type="date" class="form-control" id="user-birthday">
+                            <label for="register-user-birthday" class="col-form-label">Birthday:</label>
+                            <input type="date" class="form-control" id="register-user-birthday">
                         </div>
                         <div class="form-group">
-                            <label for="user-email" class="col-form-label">Email:</label>
-                            <input type="email" class="form-control" id="user-email">
+                            <label for="register-user-email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="register-user-email">
                         </div>
                         <div class="form-group">
-                            <label for="user-password" class="col-form-label">Password:</label>
-                            <input type="password" class="form-control" id="user-password">
+                            <label for="register-user-password" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="register-user-password">
                         </div>
                         <div class="form-group">
-                            <label for="user-password-re" class="col-form-label">Confirm password:</label>
-                            <input type="password" class="form-control" id="user-confirm-password">
+                            <label for="register-user-confirm-password" class="col-form-label">Confirm password:</label>
+                            <input type="password" class="form-control" id="register-user-confirm-password">
                         </div>
                     </form>
                 </div>
@@ -91,12 +91,12 @@
                     <form id="login-form" action="#" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="user-email" class="col-form-label">Email:</label>
-                            <input type="email" class="form-control" id="user-email">
+                            <label for="login-user-email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="login-user-email">
                         </div>
                         <div class="form-group">
-                            <label for="user-password" class="col-form-label">Password:</label>
-                            <input type="password" class="form-control" id="user-password">
+                            <label for="login-user-password" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="login-user-password">
                         </div>
                     </form>
                 </div>
@@ -118,6 +118,8 @@
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/myjs/register.js' %}"></script>
+    <script src="{% static 'js/myjs/login.js' %}"></script>
+
 </body>
 
 </html>

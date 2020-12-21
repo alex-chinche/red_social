@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    console.log("ready!");
-
     $('#show-modal-register').on('click', function () {
         var now = new Date();
         var month = (now.getMonth() + 1);
@@ -12,13 +10,9 @@ $(document).ready(function () {
             day = "0" + day;
         }
         var today = now.getFullYear() - 16 + '-' + month + '-' + day;
-        $('#user-birthday').val(today);
+        $('#register-user-birthday').val(today);
 
         $('#registerModal').modal('show')
-    });
-
-    $('#show-modal-login').on('click', function () {
-        $('#loginModal').modal('show')
     });
 
     $('#register-form').on('submit', function (event) {
@@ -35,7 +29,7 @@ $(document).ready(function () {
         var csrftoken = $("[name=csrfmiddlewaretoken]").val();
 
         $.ajax({
-            url: "/login/",
+            url: "/register/",
             type: "POST",
             headers: {
                 "X-CSRFToken": csrftoken
@@ -43,12 +37,12 @@ $(document).ready(function () {
             cache: true,
             dataType: 'json',
             data: {
-                name: $('#user-name').val(),
-                surnames: $('#user-surname').val(),
-                birthday: $('#user-birthday').val(),
-                email: $('#user-email').val(),
-                password: $('#user-password').val(),
-                confirmPassword: $('#user-confirm-password').val(),
+                name: $('#register-user-name').val(),
+                surnames: $('#register-user-surname').val(),
+                birthday: $('#register-user-birthday').val(),
+                email: $('#register-user-email').val(),
+                password: $('#register-user-password').val(),
+                confirmPassword: $('#register-user-confirm-password').val(),
             },
 
             success: function (json) {
@@ -74,6 +68,13 @@ $(document).ready(function () {
 
             error: function (xhr, errmsg, err) {
                 console.log("Error accessing the petition");
+                if (document.getElementById('unexpectedError') == null) {
+                    $('#register-form').prepend('<div id="unexpectedError" class="alert alert-danger alert-dismissible fade show" role="alert"><strong><svg viewBox="0 0 16 16" width="16" height="16"><path class="icon-warning" fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg> Unexpected error</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
+                    );
+                }
+                $('#register-button svg').removeClass('rotate');
+                $('#register-button').prop("disabled", false);
+                $('#register-button svg').hide();
             }
         });
     };
