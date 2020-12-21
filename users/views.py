@@ -21,8 +21,8 @@ def main(request):
 
 
 @auth_required
-def home(request):
-    return render(request, 'home.html')
+def home(request, data):
+    return render(request, 'home.html', {'data': data})
 
 
 def register(request):
