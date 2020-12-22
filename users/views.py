@@ -16,8 +16,10 @@ from .login_validators import auth_required
 
 def main(request):
     token = request.COOKIES.get('auth_token')
-    print(token)
-    return render(request, 'main.html')
+    if token:
+        return redirect('/home')
+    else:
+        return render(request, 'main.html')
 
 
 @auth_required

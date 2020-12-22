@@ -7,18 +7,15 @@ __secret_key = 'qx5FGbEPokYDK1NxmU1sPy2uIHHOUu0evbR3JSV0sNRHwPkVIW1Eehtyogv6A7GF
 def encode_token(email, hashed_password):
     encoded_data = jwt.encode(
         {'email': email, 'password': hashed_password}, __secret_key, algorithm='HS256')
-
     return encoded_data
 
 
 def decode_token(token):
     decoded_data = jwt.decode(token, __secret_key, algorithms='HS256')
-
     return decoded_data
 
 
 def hash_password(password):
     encoded_password = password.encode()
     hashed_password = hashlib.sha256(encoded_password).hexdigest()
-
     return hashed_password

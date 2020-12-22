@@ -1,0 +1,121 @@
+html {
+    min-height: 100%;
+    background: hsl(221, 100%, 78%);
+    background: linear-gradient( to left top, #8362b8, #b9caff);
+}
+
+body {
+    background-color: transparent;
+}
+
+p {
+    font-size: 25px;
+}
+
+.icon-loading {
+    columns: white;
+    fill: currentColor;
+    display: none;
+}
+
+.icon-warning {
+    color: #856404;
+    fill: currentColor;
+}
+
+.icon-settings {
+    color: #020100;
+    fill: currentColor;
+}
+
+.icon-check {
+    color: #146300;
+    fill: currentColor;
+}
+
+.rotate {
+    animation: rotation 1.5s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(359deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.modal-header {
+    background-color: rgb(163, 185, 255);
+}
+
+.modal-body {
+    background-color: rgb(169, 238, 255);
+}
+
+.modal-body input {
+    background-color: rgb(204, 245, 255);
+}
+
+.modal-footer {
+    background-color: rgb(163, 185, 255);
+}
+
+.modal-title {
+    color: red;
+    font-family: 'Courier New', monospace;
+    font-size: 40px;
+}
+
+#navbar {
+    overflow: hidden;
+    background: rgb(120, 90, 255);
+}
+
+#navbar .nav-option {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: .3s;
+}
+
+.settings {
+    float: right;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: .3s;
+}
+
+#navbar .nav-option:hover {
+    background-image: linear-gradient(#772ffd, #d6aaff);
+    color: white;
+}
+
+#navbar .active {
+    background-image: linear-gradient(#772ffd, #d6aaff);
+    color: white;
+    font-weight: bold;
+}
+
+.content {
+    padding: 16px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky+.content {
+    padding-top: 60px;
+}

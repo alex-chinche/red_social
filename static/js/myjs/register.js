@@ -9,8 +9,12 @@ $(document).ready(function () {
         if (day < 10) {
             day = "0" + day;
         }
-        var today = now.getFullYear() - 16 + '-' + month + '-' + day;
-        $('#register-user-birthday').val(today);
+        var minAge = now.getFullYear() - 16 + '-' + month + '-' + day;
+        var maxAge = now.getFullYear() - 100 + '-' + month + '-' + day;
+
+        $('#register-user-birthday').val(minAge);
+        document.getElementById("register-user-birthday").setAttribute("max", minAge);
+        document.getElementById("register-user-birthday").setAttribute("min", maxAge);
 
         $('#registerModal').modal('show')
     });
