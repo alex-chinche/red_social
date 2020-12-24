@@ -26,6 +26,18 @@ def main(request):
 def home(request, data):
     return render(request, 'home.html', {'data': data})
 
+@auth_required
+def profile(request, data):
+    return render(request, 'profile.html', {'data': data})
+
+@auth_required
+def messages(request, data):
+    return render(request, 'messages.html', {'data': data})
+
+@auth_required
+def world(request, data):
+    return render(request, 'world.html', {'data': data})
+
 
 def register(request):
     if request.is_ajax():

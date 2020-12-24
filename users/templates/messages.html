@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Messages{% endblock %}
 
 {% block navbar %}
-<a class="nav-option active" href="{% url 'home' %}">Home</a>
+<a class="nav-option" href="{% url 'home' %}">Home</a>
 <a class="nav-option" href="{% url 'profile' %}">Profile</a>
-<a class="nav-option" href="{% url 'messages' %}">Messages</a>
+<a class="nav-option active" href="{% url 'messages' %}">Messages</a>
 <a class="nav-option" href="{% url 'world' %}">World</a>
 {% endblock %}
 
 {% block body %}
 <div class="content">
     <h3>Hola {{ data.name }}</h3>
-    <p>This is the home page</p>
+    <p>This is your messages page</p>
 </div>
 {% endblock %}
 

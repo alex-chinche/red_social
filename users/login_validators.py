@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 
 
 def auth_required(func):
+    # Decorator to ensure that user is logged before accessing to private content
     def internal_func(request, *args, **kwargs):
         try:
             readable_token = request.COOKIES.get('auth_token')

@@ -8,7 +8,12 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
     path('confirm/<str:token>', views.confirm_email),
-    path('home/', views.home),
+    path('home/', views.home, name='home'),
+    path('profile/', views.profile, name='profile'),
+    path('messages/', views.messages, name='messages'),
+    path('world/', views.world, name='world'),
+
+
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
