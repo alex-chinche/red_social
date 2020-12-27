@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
-{% block title %}Contact{% endblock %}
+{% load static %}
+{% block title %}World{% endblock %}
 
 {% block navbar %}
 <a class="nav-option" href="{% url 'home' %}">Home</a>
@@ -11,10 +11,57 @@
 
 {% block body %}
 <div class="content">
-    <h3>Hola {{ data.name }}</h3>
-    <p>Find your friends here</p>
+    <h3>Hi, {{ mydata.name }}</h3>
+    <div class="row">
+        <div class="col-sm">
+            <h4>Current friend requests</h4>
+            <p>You have {{ friend_request_list.count }} friend requests:</p>
+            {% for friend_request in friend_request_list %}
+            <div class="inline">
+                {% if friend_request.profile_pic %}
+                <img src="{{ MEDIA_URL }}{{friend_request.profile_pic}}" class="small-profile-pic">
+                {% else %}
+                <img src="{% static '/images/default-user.png' %}" class="small-profile-pic">
+                {% endif %}
+                <p class="small text-centered">{{ friend_request.name }} {{ friend_request.surnames }}</p>
+                <div class="button-container">
+                    <a class="button" href="#">Confirm</a>
+                    <a class="button" href="#">Cancel</a>
+                </div>
+            </div>
+            <hr style="clear:both;">
+            {% endfor %}
+            <h3>My friends({{ friend_list.count }})</h3>
+            <br>
+            {% for friend in friend_list %}
+            <div class="inline" style="top: 50%;">
+                {% if friend.profile_pic %}
+                <img src="{{ MEDIA_URL }}{{ friend.profile_pic }}" class="small-profile-pic">
+                {% else %}
+                <img src="{% static '/images/default-user.png' %}" class="small-profile-pic">
+                {% endif %}
+                <p class="small text-centered">{{ friend.name }} {{ friend.surnames }}</p>
+            </div>
+            <hr style="clear:both;">
+            {% endfor %}
+        </div>
+        <div class="col-sm">
+            <div id="search" class="right">
+                <input class="input" type="text" id="search-user">
+                <a class="button input-button right" id="search-button">
+                    <svg class="icon-loading" viewBox="0 0 16 16" width="16" height="16">
+                        <path fill-rule="evenodd"
+                            d="M8 2.5a5.487 5.487 0 00-4.131 1.869l1.204 1.204A.25.25 0 014.896 6H1.25A.25.25 0 011 5.75V2.104a.25.25 0 01.427-.177l1.38 1.38A7.001 7.001 0 0114.95 7.16a.75.75 0 11-1.49.178A5.501 5.501 0 008 2.5zM1.705 8.005a.75.75 0 01.834.656 5.501 5.501 0 009.592 2.97l-1.204-1.204a.25.25 0 01.177-.427h3.646a.25.25 0 01.25.25v3.646a.25.25 0 01-.427.177l-1.38-1.38A7.001 7.001 0 011.05 8.84a.75.75 0 01.656-.834z">
+                        </path>
+                    </svg> Search
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}
+<script src="{% static 'js/myjs/world.js' %}"></script>
 {% endblock %}

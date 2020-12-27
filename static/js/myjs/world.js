@@ -1,0 +1,35 @@
+$(document).ready(function () {
+    $('#search-button').click(function () {
+        find_user();
+    });
+});
+
+function find_user() {
+    if ($('#search-user').val().length != 0) {
+        $('#search-button svg').addClass('octicon octicon-sync rotate');
+        $('#search-button').prop("disabled", true);
+        $('#search-button svg').show();
+        setTimeout(function () {
+            $.ajax({
+                url: "/find_users/" + $('#search-user').val(),
+                type: "GET",
+                cache: true,
+                dataType: 'html',
+
+                success: function (html) {
+                    console.log(html)
+                    $('#search_results').remove()
+                    $('#search').after(html);
+                    $('#search-button svg').removeClass('rotate');
+                    $('#search-button svg').hide();
+                },
+
+                error: function (xhr, errmsg, err) {
+                    $('#search_results').remove()
+                    $('#search-button svg').removeClass('rotate');
+                    $('#search-button svg').hide();
+                }
+            });
+        }, 2000);
+    }
+};

@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>imagen</title>
+    <title>Certy - Public</title>
 </head>
 
 <body>
@@ -38,39 +38,39 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="register-user-name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="register-user-name">
+                            <input type="text" class="form-control input" id="register-user-name">
                         </div>
                         <div class="form-group">
                             <label for="register-user-surname" class="col-form-label">Surnames:</label>
-                            <input type="text" class="form-control" id="register-user-surname">
+                            <input type="text" class="form-control input" id="register-user-surname">
                         </div>
                         <div class="form-group">
                             <label for="register-user-birthday" class="col-form-label">Birthday:</label>
-                            <input type="date" class="form-control" id="register-user-birthday">
+                            <input type="date" class="form-control input" id="register-user-birthday">
                         </div>
                         <div class="form-group">
                             <label for="register-user-email" class="col-form-label">Email:</label>
-                            <input type="email" class="form-control" id="register-user-email">
+                            <input type="email" class="form-control input" id="register-user-email">
                         </div>
                         <div class="form-group">
                             <label for="register-user-password" class="col-form-label">Password:</label>
-                            <input type="password" class="form-control" id="register-user-password">
+                            <input type="password" class="form-control input" id="register-user-password">
                         </div>
                         <div class="form-group">
                             <label for="register-user-confirm-password" class="col-form-label">Confirm password:</label>
-                            <input type="password" class="form-control" id="register-user-confirm-password">
+                            <input type="password" class="form-control input" id="register-user-confirm-password">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="register-button" form="register-form" class="btn btn-primary">
+                    <button type="submit" id="register-button" form="register-form" class="button">
                         <svg class="icon-loading" viewBox="0 0 16 16" width="16" height="16">
                             <path fill-rule="evenodd"
                                 d="M8 2.5a5.487 5.487 0 00-4.131 1.869l1.204 1.204A.25.25 0 014.896 6H1.25A.25.25 0 011 5.75V2.104a.25.25 0 01.427-.177l1.38 1.38A7.001 7.001 0 0114.95 7.16a.75.75 0 11-1.49.178A5.501 5.501 0 008 2.5zM1.705 8.005a.75.75 0 01.834.656 5.501 5.501 0 009.592 2.97l-1.204-1.204a.25.25 0 01.177-.427h3.646a.25.25 0 01.25.25v3.646a.25.25 0 01-.427.177l-1.38-1.38A7.001 7.001 0 011.05 8.84a.75.75 0 01.656-.834z">
                             </path>
                         </svg>
                         Register</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="button" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -93,23 +93,23 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="login-user-email" class="col-form-label">Email:</label>
-                            <input type="email" class="form-control" id="login-user-email">
+                            <input type="email" class="form-control input" id="login-user-email">
                         </div>
                         <div class="form-group">
                             <label for="login-user-password" class="col-form-label">Password:</label>
-                            <input type="password" class="form-control" id="login-user-password">
+                            <input type="password" class="form-control input" id="login-user-password">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="login-button" form="login-form" class="btn btn-primary">
+                    <button type="submit" id="login-button" form="login-form" class="button">
                         <svg class="icon-loading" viewBox="0 0 16 16" width="16" height="16">
                             <path fill-rule="evenodd"
                                 d="M8 2.5a5.487 5.487 0 00-4.131 1.869l1.204 1.204A.25.25 0 014.896 6H1.25A.25.25 0 011 5.75V2.104a.25.25 0 01.427-.177l1.38 1.38A7.001 7.001 0 0114.95 7.16a.75.75 0 11-1.49.178A5.501 5.501 0 008 2.5zM1.705 8.005a.75.75 0 01.834.656 5.501 5.501 0 009.592 2.97l-1.204-1.204a.25.25 0 01.177-.427h3.646a.25.25 0 01.25.25v3.646a.25.25 0 01-.427.177l-1.38-1.38A7.001 7.001 0 011.05 8.84a.75.75 0 01.656-.834z">
                             </path>
                         </svg>
                         Login</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="button" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
