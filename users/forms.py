@@ -30,3 +30,9 @@ class UserLoginForm(forms.Form):
         cleaned_data = self.cleaned_data
 
         return cleaned_data
+
+
+class ImageFileUploadForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['profile_pic']

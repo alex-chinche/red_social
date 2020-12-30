@@ -12,10 +12,35 @@
 
 {% block body %}
 <div class="content">
-    <h3>Hola {{ mydata.name }}</h3>
-    <p>This is your profile page</p>
+    <h3>Hi, {{ mydata.name }}</h3>
+    <div class="row centered">
+        <div class="col-sm">
+            <div class="imagewrap">
+                {% if mydata.profile_pic %}
+                <img id="profile_pic" src="{{ MEDIA_URL }}{{ mydata.profile_pic }}" class="main-profile-pic">
+                {% else %}
+                <img id="profile_pic" src="{% static '/images/default-user.png' %}" class="main-profile-pic">
+                {% endif %}
+                <form id="add-pic-form" enctype="multipart/form-data" action="#" method="POST">
+                    {% csrf_token %}
+                    <label for="file-upload" class="add-profile-pic">
+                        <svg viewBox="0 0 512 512" width="50" height="50">
+                            <path fill="currentColor"
+                                d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z">
+                            </path>
+                        </svg>
+                    </label>
+                    <input id="file-upload" onchange='addPick(this.form)' type="file" name="profile_pic"
+                        accept="image/*" style='display: none;' />
+                    <div id="info"></div>
+                </form>
+            </div>
+            <p class="large text-centered">{{ mydata.name }} {{ mydata.surnames }}</p>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
+<script src="{% static 'js/myjs/profile.js' %}"></script>
 {% endblock %}

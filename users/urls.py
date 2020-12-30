@@ -16,12 +16,16 @@ urlpatterns = [
          views.send_friend_request, name='send_friend_request'),
     path('accept_friend_request/<int:from_user_id>/',
          views.accept_friend_request, name='accept_friend_request'),
-    path('reject_friend_request/<int:from_user_id>/',
-         views.reject_friend_request, name='reject_friend_request'),
+    path('reject_friend_request_sent/<int:to_user_id>/',
+         views.reject_friend_request_sent, name='reject_friend_request_sent'),
+    path('reject_friend_request_received/<int:from_user_id>/',
+         views.reject_friend_request_received, name='reject_friend_request_received'),
     path('find_users/<str:search_word>/',
          views.find_users, name='find_users'),
     path('logout/',
          views.logout, name='logout'),
+    path('upload_profile_pic/',
+         views.upload_profile_pic, name='upload_profile_pic'),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

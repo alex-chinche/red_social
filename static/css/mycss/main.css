@@ -1,7 +1,7 @@
 html {
     min-height: 100%;
     background: hsl(221, 100%, 78%);
-    background: linear-gradient( to left top, #8362b8, #b9caff);
+    background: linear-gradient( to left top, #6b46a7, #b9caff);
 }
 
 p {
@@ -52,26 +52,29 @@ body {
 }
 
 .modal-header {
-    background: rgb(155, 133, 255);
+    background: rgb(168, 149, 255);
 }
 
 .modal-body {
-    background-image: linear-gradient(#ac80ff, #c7a9ff);
+    background-image: linear-gradient(#a38affa4, #c3b3ffa4);
     padding: 0 3em 0 3em;
 }
 
 .input {
     background-color: rgb(204, 245, 255);
+    position: sticky;
 }
 
 .modal-footer {
-    background: rgb(155, 133, 255);
+    background: rgb(168, 149, 255);
 }
 
 .modal-title {
-    color: red;
-    font-family: 'Courier New', monospace;
     font-size: 40px;
+    font-family: 'Bookman', 'URW Bookman L', serif;
+    font: bold;
+    color: rgba(10, 60, 150, 0.8);
+    text-shadow: 1px 3px 3px rgb(88, 17, 182), 0 0 0 rgb(55, 19, 122), 1px 4px 6px rgb(16, 134, 253);
 }
 
 #navbar {
@@ -196,6 +199,10 @@ body {
     font-size: 13px;
 }
 
+.large {
+    font-size: 26px;
+}
+
 .dropdown {
     float: right;
 }
@@ -240,12 +247,47 @@ body {
     border-radius: 50%;
 }
 
+.main-profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
 .button-container {
     margin-left: auto;
     white-space: nowrap;
 }
 
 .list {
-    padding-top: 10px;
+    padding: 30px 15px 15px 15px;
     clear: both;
+}
+
+.load-button {
+    width: 75px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.imagewrap {
+    display: inline-block;
+    position: relative;
+}
+
+.add-profile-pic {
+    background-color: white;
+    border-radius: 50%;
+    color: rgb(31, 180, 39);
+    fill: currentColor;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.add-profile-pic:hover {
+    color: green;
+    fill: currentColor;
+    transition: .3s;
 }
