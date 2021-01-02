@@ -14,6 +14,8 @@ import hashlib
 from .login_validators import auth_required
 from django.templatetags.static import static
 from django.db.models import Q
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 
 def main(request):
@@ -27,6 +29,19 @@ def main(request):
 @auth_required
 def home(request, mydata):
     return render(request, 'home.html', {'mydata': mydata})
+
+
+@auth_required
+def send_pulse(request, mydata):
+    if request.is_ajax():
+        try:
+            mydata.last_connection = timezone.now()
+            mydata.save()
+            return JsonResponse({'connected': True})
+        except:
+            return JsonResponse({'connected': False})
+    else:
+        return redirect('/')
 
 
 @auth_required
@@ -109,15 +124,15 @@ def find_users(request, mydata, search_word):
             id__in=Friend_Request.objects.filter(to_user_id=mydata.id).values('from_user_id'))
         users_found = User.objects.filter(
             Q(name__icontains=search_word) | Q(surnames__icontains=search_word)).exclude(id=mydata.id)
-        users_found_html = '<div id="search_results" class="list">'
+        users_found_html = '<div id="search-results" class="list">'
         if users_found:
             for user in users_found:
                 if user.profile_pic:
-                    users_found_html += '<div class="inline"><img src="' + settings.MEDIA_URL + '/images/' + \
+                    users_found_html += '<div class="search-result"><img src="' + settings.MEDIA_URL + \
                         str(user.profile_pic) + '" class="small-profile-pic"> ' + '<p class="small text-centered">' + \
                         user.name + " " + user.surnames + '</p><div class="button-container">'
                 else:
-                    users_found_html += '<div class="inline"><img src="' + static('images/default-user.png') + '" class="small-profile-pic"> ' + \
+                    users_found_html += '<div class="search-result"><img src="' + static('images/default-user.png') + '" class="small-profile-pic"> ' + \
                         '<p class="small text-centered">' + user.name + " " + \
                         user.surnames + '</p><div class="button-container">'
                 if user in friends:

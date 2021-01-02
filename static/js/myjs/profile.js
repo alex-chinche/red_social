@@ -21,7 +21,6 @@ $('#add-pic-form').on('submit', function (event) {
             contentType: false,
 
             success: function (json) {
-                console.log("ajax correcto")
                 $(profile_pic).attr('src', '/media/' + json['path']);
             },
 

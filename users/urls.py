@@ -4,13 +4,21 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    ############### Public section ###################
     path('', views.main, name='main'),
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
     path('confirm/<str:token>', views.confirm_email),
+    ############### Private section ###################
     path('home/', views.home, name='home'),
+    path('pulse/', views.send_pulse, name='send_pulse'),
+    # Profile section
     path('profile/', views.profile, name='profile'),
+    path('upload_profile_pic/',
+         views.upload_profile_pic, name='upload_profile_pic'),
+    # Messages section
     path('messages/', views.messages, name='messages'),
+    # World section
     path('world/', views.world, name='world'),
     path('send_friend_request/<int:user_id>/',
          views.send_friend_request, name='send_friend_request'),
@@ -22,10 +30,10 @@ urlpatterns = [
          views.reject_friend_request_received, name='reject_friend_request_received'),
     path('find_users/<str:search_word>/',
          views.find_users, name='find_users'),
+    # Logout
     path('logout/',
          views.logout, name='logout'),
-    path('upload_profile_pic/',
-         views.upload_profile_pic, name='upload_profile_pic'),
+
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

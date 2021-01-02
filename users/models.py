@@ -3,6 +3,7 @@ import os
 import base64
 from django.conf import settings
 import glob
+import datetime
 
 
 def get_custom_profile_path(instance, filename):
@@ -27,6 +28,7 @@ class User(models.Model):
     password = models.CharField(max_length=100, blank=True)
     verified = models.BooleanField(default=False)
     friends = models.ManyToManyField("User", blank=True)
+    last_connection = models.DateTimeField(auto_now=True)
     profile_pic = models.ImageField(
         null=True, blank=True, upload_to=get_custom_profile_path)
 

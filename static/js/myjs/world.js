@@ -17,8 +17,8 @@ function find_user() {
                 dataType: 'html',
 
                 success: function (html) {
-                    $('#search_results').remove()
-                    $('#search').after(html);
+                    $('#search-results').remove()
+                    $('#search-users').after(html);
                     $('#search-button svg').removeClass('rotate');
                     $('#search-button svg').hide();
                 },
