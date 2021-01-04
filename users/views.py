@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from .forms import UserRegisterForm, UserLoginForm, ImageFileUploadForm
-from .models import User, Friend_Request
+from .forms import UserRegisterForm, UserLoginForm, ProfilePicUploadForm, PhotoUploadForm
+from .models import User, Friend_Request, Photo
 from .constants import *
 from django.http import JsonResponse
 from django.core.mail import send_mail
@@ -58,11 +58,10 @@ def messages(request, mydata):
 def world(request, mydata):
     users_list = User.objects.exclude(id=mydata.id)
     for user in users_list:
-        print("name:", user.name, "profilepic:", user.profile_pic)
-    friend_request_list = User.objects.filter(id__in=Friend_Request.objects.filter(
-        to_user_id=mydata.id).values('from_user_id')).order_by('name')
-    friend_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
-        from_user_id=mydata.id).values('to_user_id')).order_by('name')
+        friend_request_list = User.objects.filter(id__in=Friend_Request.objects.filter(
+            to_user_id=mydata.id).values('from_user_id')).order_by('name')
+        friend_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
+            from_user_id=mydata.id).values('to_user_id')).order_by('name')
     return render(request, 'world.html', {'mydata': mydata, 'users_list': users_list, 'friend_request_list': friend_request_list, 'friend_list': friend_list})
 
 
@@ -140,7 +139,7 @@ def find_users(request, mydata, search_word):
                 elif user in requests_sent:
                     users_found_html += '<a class="button right" href="#" data-requestsentid="' + \
                         str(user.id) + \
-                        '" onclick="rejectFriendRequestSent(this)">Waiting...</a><br>'
+                        '" onclick="rejectFriendRequestSent(this)">Cancel request...</a><br>'
                 elif user in requests_received:
                     users_found_html += '<a class="button" data-confirmid="' + \
                         str(user.id) + '" onclick="acceptFriend(this)" href="#">Confirm</a> <a class="button" data-rejectid="' + \
@@ -247,12 +246,51 @@ def login(request):
 def upload_profile_pic(request, mydata):
     if request.is_ajax():
         if request.method == 'POST':
-            form = ImageFileUploadForm(request.POST, request.FILES)
+            form = ProfilePicUploadForm(request.POST, request.FILES)
             if form.is_valid():
                 profile_pic = request.FILES.get('profile_pic')
                 mydata.profile_pic = profile_pic
                 mydata.save()
                 return JsonResponse({'error': False, 'path': mydata.profile_pic.name})
+            else:
+                return JsonResponse({'error': True})
+        else:
+            return JsonResponse({'error': True})
+    else:
+        return redirect('/profile/')
+
+
+@auth_required
+def upload_photo(request, mydata):
+    if request.is_ajax():
+        if request.method == 'POST':
+            form = PhotoUploadForm(request.POST, request.FILES)
+            if form.is_valid():
+                photo = request.FILES.get('picture')
+                myimage = Photo(profile=mydata,
+                                picture=photo)
+                myimage.save()
+                return JsonResponse({'error': False, 'path': myimage.picture.name})
+            else:
+                return JsonResponse({'error': True})
+        else:
+            return JsonResponse({'error': True})
+    else:
+        return redirect('/profile/')
+
+
+@auth_required
+def get_my_photos(request, mydata):
+    if request.is_ajax():
+        if request.method == 'GET':
+            my_photos = Photo.objects.filter(profile=mydata.id)
+            html = ""
+            for photo in my_photos:
+                html += '<div class="responsive"><div class="gallery"><a href="img_5terre.jpg"><img src="' + settings.MEDIA_URL + \
+                    str(photo.picture) + '" alt="' + str(photo.picture.name) + \
+                    '" width="600"height="400"></a></div></div>'
+            html += '<br class="clear">'
+            return HttpResponse(html)
         else:
             return JsonResponse({'error': True})
     else:
@@ -264,3 +302,20 @@ def logout(request, mydata):
     response = render(request, 'main.html')
     response.delete_cookie('auth_token')
     return response
+
+
+@auth_required
+def get_friend_list(request, mydata):
+    friends_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
+        from_user_id=mydata.id).values('to_user_id'))
+    friends_html = ''
+    for friend in friends_list:
+        friends_html += '<div style="display:inline">' + '<p class="status '
+        if friend.last_connection > timezone.now() - timedelta(seconds=30):
+            friends_html += 'available'
+        else:
+            friends_html += 'disconnected'
+        friends_html += '">•</p> ' + \
+            friend.name + ' ' + friend.surnames + '</div>'
+        friends_html += '<hr class="clear" style="margin-top:1px;margin-bottom:1px;">'
+    return HttpResponse(friends_html)

@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Photo
 from django.core.exceptions import ValidationError
 
 
@@ -32,7 +32,13 @@ class UserLoginForm(forms.Form):
         return cleaned_data
 
 
-class ImageFileUploadForm(forms.ModelForm):
+class ProfilePicUploadForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['profile_pic']
+
+
+class PhotoUploadForm(forms.ModelForm):
+    class Meta:
+        model = Photo
+        fields = ['picture']

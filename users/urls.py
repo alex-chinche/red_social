@@ -16,6 +16,11 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('upload_profile_pic/',
          views.upload_profile_pic, name='upload_profile_pic'),
+    path('upload_photo/',
+         views.upload_photo, name='upload_photo'),
+    path('get_my_photos/',
+         views.get_my_photos, name='get_my_photos'),
+
     # Messages section
     path('messages/', views.messages, name='messages'),
     # World section
@@ -30,6 +35,8 @@ urlpatterns = [
          views.reject_friend_request_received, name='reject_friend_request_received'),
     path('find_users/<str:search_word>/',
          views.find_users, name='find_users'),
+    path('get_friend_list/',
+         views.get_friend_list, name='get_friend_list'),
     # Logout
     path('logout/',
          views.logout, name='logout'),

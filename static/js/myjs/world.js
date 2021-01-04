@@ -92,7 +92,7 @@ function sendFriendRequest(sendfriendbutton) {
         dataType: 'json',
 
         success: function (html) {
-            $(sendfriendbutton).replaceWith('<a class="button right" href="#" data-requestsentid="' + $(sendfriendbutton).data('requesttosendid') + '" onclick="rejectFriendRequestSent(this)">Waiting...</a>');
+            $(sendfriendbutton).replaceWith('<a class="button right" href="#" data-requestsentid="' + $(sendfriendbutton).data('requesttosendid') + '" onclick="rejectFriendRequestSent(this)">Cancel request...</a>');
         },
 
         error: function (xhr, errmsg, err) {

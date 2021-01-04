@@ -1,5 +1,19 @@
 setInterval(sendPulse, 15000);
 
+$.ajax({
+    url: "/get_friend_list/",
+    type: "GET",
+    async: true,
+    dataType: 'html',
+    success: function (html) {
+        $('#chat-inside').html(html)
+    },
+    error: function (xhr, errmsg, err) {
+        console.log("Error in pulse request")
+    }
+});
+
+
 function sendPulse() {
     $.ajax({
         url: "/pulse/",

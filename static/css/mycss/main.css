@@ -2,6 +2,8 @@ html {
     min-height: 100%;
     background: hsl(221, 100%, 78%);
     background: linear-gradient( to left top, #6b46a7, #b9caff);
+    width: 100%;
+    overflow-x: hidden;
 }
 
 p {
@@ -10,28 +12,25 @@ p {
 
 body {
     background-color: transparent;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 100%;
 }
 
 .icon-loading {
     color: rgb(71, 0, 138);
-    fill: currentColor;
     display: none;
 }
 
 .icon-warning {
     color: #856404;
-    fill: currentColor;
 }
 
 .icon-settings {
     color: #020100;
-    fill: currentColor;
 }
 
 .icon-check {
     color: #146300;
-    fill: currentColor;
 }
 
 .rotate {
@@ -80,6 +79,7 @@ body {
 #navbar {
     overflow: hidden;
     background: rgb(120, 90, 255);
+    z-index: 2;
 }
 
 #navbar .nav-option {
@@ -121,7 +121,6 @@ body {
     display: block;
     background-image: linear-gradient(#772ffd, #d6aaff);
     color: white;
-    fill: currentColor;
 }
 
 .content {
@@ -151,7 +150,7 @@ body {
     box-shadow: 2px 2px rgb(68, 68, 68);
     border-left: 1px solid #CCCCCC;
     background-color: rgb(212, 167, 255);
-    border-radius: 15%;
+    border-radius: 10px;
     display: inline-block;
 }
 
@@ -175,7 +174,7 @@ body {
     box-shadow: 1px 1px rgb(68, 68, 68);
     border-left: 1px solid #CCCCCC;
     background-color: rgb(228, 198, 255);
-    border-radius: 15%;
+    border-radius: 10px;
 }
 
 .search {
@@ -183,7 +182,7 @@ body {
     width: 400px;
     display: flex;
     align-items: center;
-    border-radius: 1%;
+    border-radius: 2px;
 }
 
 .search-result {
@@ -192,11 +191,15 @@ body {
     display: flex;
     align-items: center;
     background-color: rgba(226, 190, 255, 0.205);
-    border-radius: 1%;
+    border-radius: 2px;
 }
 
 .right {
     float: right;
+}
+
+.left {
+    float: left;
 }
 
 .input-button {
@@ -241,7 +244,6 @@ body {
 .dropdown-content a:hover {
     background-image: linear-gradient(#8a4bff, #d6aaff);
     color: white;
-    fill: currentColor;
     transition: .2s;
 }
 
@@ -289,7 +291,6 @@ body {
     background-color: white;
     border-radius: 50%;
     color: rgb(31, 180, 39);
-    fill: currentColor;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -297,37 +298,14 @@ body {
 
 .add-profile-pic:hover {
     color: green;
-    fill: currentColor;
     transition: .3s;
 }
 
-.main_name {
-    font-size: 30px;
-    font-family: 'Bookman', 'URW Bookman L', serif;
-    color: rgb(233, 233, 233);
-    border-radius: 3%;
-    background-color: rgba(63, 0, 211, 0.932);
-    padding-top: 5px;
-    text-align: center;
-    margin-right: 30%;
-    margin-left: 30%;
-    transform: translateY(10px);
-    transition: .7s;
-}
-
-.main_name:hover {
-    color: rgba(63, 0, 211, 0.932);
-    border-style: groove;
-    background-color: transparent;
-    transition: .7s;
-    font-size: 35px;
-    transform: translateY(0px);
-}
-
 .chat {
-    background-color: rgb(201, 195, 221);
-    border-radius: 3% 0 0 3%;
+    background-color: rgb(58, 23, 173);
+    border-radius: 5px 0 0 5px;
     padding: 12px;
+    color: white;
 }
 
 .chat-col {
@@ -336,16 +314,18 @@ body {
 
 .chat-button {
     background-color: cornsilk;
-    border-radius: 10%;
+    border-radius: 10px;
     margin-bottom: 20px;
     cursor: pointer;
     width: 55px;
     float: right;
     font-size: 12px;
+    padding: 2px;
 }
 
 .clear {
     clear: both;
+    line-height: 0;
 }
 
 .flex-fixed-width-item {
@@ -358,4 +338,84 @@ body {
     z-index: 1;
     opacity: .85;
     margin-top: 30px;
+}
+
+.profile-picture-list {
+    background-color: rgba(129, 39, 202, 0.158);
+    border-radius: 15px;
+}
+
+div.gallery {
+    border: 1px solid rgb(80, 80, 80);
+    transition: .3s;
+}
+
+div.gallery:hover {
+    transform: translate(-5px, -10px);
+    box-shadow: 3px 8px 5px #200e30;
+    transition: .3s;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+.responsive {
+    padding: 2% 1%;
+    float: left;
+    width: 19.9999%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .responsive {
+        width: 24.999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%;
+        padding: 2% 6%;
+    }
+}
+
+.upload {
+    color: white;
+    background-color: rgb(71, 0, 138);
+    padding: 8px 0;
+    width: 100px;
+    transition: .4s;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.upload:hover {
+    background-color: rgb(106, 2, 204);
+    transition: .4s;
+}
+
+.status {
+    display: inline;
+    font-size: 22px;
+}
+
+.available {
+    color: rgb(15, 141, 15)
+}
+
+.busy {
+    color: red;
+}
+
+.disconnected {
+    color: rgb(141, 141, 141)
 }
