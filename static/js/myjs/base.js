@@ -1,18 +1,22 @@
-setInterval(sendPulse, 15000);
+setInterval(sendPulse, 10000);
+setInterval(getFriendList, 10000);
 
-$.ajax({
-    url: "/get_friend_list/",
-    type: "GET",
-    async: true,
-    dataType: 'html',
-    success: function (html) {
-        $('#chat-inside').html(html)
-    },
-    error: function (xhr, errmsg, err) {
-        console.log("Error in pulse request")
-    }
-});
-
+function getFriendList() {
+    $.ajax({
+        url: "/get_friend_list/",
+        type: "GET",
+        async: true,
+        dataType: 'json',
+        success: function (html) {
+            $('#chat-inside').html(html['friends_html'])
+            $('#friends-connected').html('(' + html['number_of_connected_friends'] + ')');
+            $('#number-of-friends').html('Friends (' + html['number_of_friends'] + ')');
+        },
+        error: function (xhr, errmsg, err) {
+            console.log("Error in pulse request")
+        }
+    });
+}
 
 function sendPulse() {
     $.ajax({
@@ -28,8 +32,11 @@ function sendPulse() {
 $(document).ready(function () {
     window.onscroll = function () { myFunction() };
     var navbar = document.getElementById("navbar");
+    var chatButton = document.getElementById("change-chat");
     var sticky = navbar.offsetTop;
+    var stickchat = chatButton.offset
     sendPulse();
+    getFriendList();
     $('#logout').click(function () {
         logout();
     });

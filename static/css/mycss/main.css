@@ -2,7 +2,6 @@ html {
     min-height: 100%;
     background: hsl(221, 100%, 78%);
     background: linear-gradient( to left top, #6b46a7, #b9caff);
-    width: 100%;
     overflow-x: hidden;
 }
 
@@ -13,12 +12,12 @@ p {
 body {
     background-color: transparent;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    width: 100%;
 }
 
 .icon-loading {
     color: rgb(71, 0, 138);
     display: none;
+    margin-left: 3px;
 }
 
 .icon-warning {
@@ -31,6 +30,11 @@ body {
 
 .icon-check {
     color: #146300;
+}
+
+.icon-search {
+    color: rgb(71, 0, 138);
+    margin-right: 5px;
 }
 
 .rotate {
@@ -74,6 +78,7 @@ body {
 .input {
     background-color: rgb(204, 245, 255);
     position: sticky;
+    border-radius: 5px;
 }
 
 #navbar {
@@ -152,6 +157,10 @@ body {
     background-color: rgb(212, 167, 255);
     border-radius: 10px;
     display: inline-block;
+}
+
+.inline {
+    display: inline;
 }
 
 .button:hover {
@@ -302,7 +311,7 @@ body {
 }
 
 .chat {
-    background-color: rgb(58, 23, 173);
+    background-color: rgb(82, 18, 184);
     border-radius: 5px 0 0 5px;
     padding: 12px;
     color: white;
@@ -315,12 +324,13 @@ body {
 .chat-button {
     background-color: cornsilk;
     border-radius: 10px;
-    margin-bottom: 20px;
     cursor: pointer;
-    width: 55px;
-    float: right;
+    position: fixed;
+    top: 15%;
+    right: 10px;
     font-size: 12px;
-    padding: 2px;
+    padding: 5px;
+    z-index: 2;
 }
 
 .clear {
@@ -330,14 +340,13 @@ body {
 
 .flex-fixed-width-item {
     transform: translateX(300px);
-    flex: 0 0 225px;
     right: 0px;
-    position: absolute;
+    top: 20%;
+    position: fixed;
     max-width: 300px;
     min-width: 200px;
     z-index: 1;
     opacity: .85;
-    margin-top: 30px;
 }
 
 .profile-picture-list {
@@ -345,60 +354,32 @@ body {
     border-radius: 15px;
 }
 
-div.gallery {
+.image {
     border: 1px solid rgb(80, 80, 80);
     transition: .3s;
 }
 
-div.gallery:hover {
+.image:hover {
     transform: translate(-5px, -10px);
     box-shadow: 3px 8px 5px #200e30;
     transition: .3s;
 }
 
-div.gallery img {
-    width: 100%;
-    height: auto;
+form {
+    display: inline-block;
 }
 
-.responsive {
-    padding: 2% 1%;
-    float: left;
-    width: 19.9999%;
-}
-
-@media only screen and (max-width: 1200px) {
-    .responsive {
-        width: 24.999%;
-        margin: 6px 0;
-    }
-}
-
-@media only screen and (max-width: 700px) {
-    .responsive {
-        width: 49.99999%;
-        margin: 6px 0;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .responsive {
-        width: 100%;
-        padding: 2% 6%;
-    }
-}
-
-.upload {
+.profile-option {
     color: white;
     background-color: rgb(71, 0, 138);
-    padding: 8px 0;
-    width: 100px;
+    padding: 6px 7px;
     transition: .4s;
     cursor: pointer;
     border-radius: 15px;
+    display: inline;
 }
 
-.upload:hover {
+.profile-option:hover {
     background-color: rgb(106, 2, 204);
     transition: .4s;
 }
@@ -418,4 +399,29 @@ div.gallery img {
 
 .disconnected {
     color: rgb(141, 141, 141)
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgba(204, 204, 204, 0.39);
+    margin: 1em 0;
+    padding: 0;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
 }

@@ -1,3 +1,4 @@
+
 function get_photos() {
     $('#profile-picture-list').html('');
 

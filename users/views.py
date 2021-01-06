@@ -45,6 +45,27 @@ def send_pulse(request, mydata):
 
 
 @auth_required
+def get_friend_list(request, mydata):
+    friends_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
+        from_user_id=mydata.id).values('to_user_id')).order_by('name')
+    number_of_connected_friends = 0
+    number_of_friends = 0
+    friends_html = ''
+    for friend in friends_list:
+        number_of_friends = number_of_friends + 1
+        friends_html += '<div style="display:inline">' + '<p class="status '
+        if friend.last_connection > timezone.now() - timedelta(seconds=30):
+            friends_html += 'available'
+            number_of_connected_friends = number_of_connected_friends + 1
+        else:
+            friends_html += 'disconnected'
+        friends_html += '">•</p> ' + \
+            friend.name + ' ' + friend.surnames + '</div>'
+        friends_html += '<hr class="clear hr-no-margin">'
+    return JsonResponse({'friends_html': friends_html, 'number_of_connected_friends': number_of_connected_friends, 'number_of_friends': number_of_friends})
+
+
+@auth_required
 def profile(request, mydata):
     return render(request, 'profile.html', {'mydata': mydata})
 
@@ -286,10 +307,9 @@ def get_my_photos(request, mydata):
             my_photos = Photo.objects.filter(profile=mydata.id)
             html = ""
             for photo in my_photos:
-                html += '<div class="responsive"><div class="gallery"><a href="img_5terre.jpg"><img src="' + settings.MEDIA_URL + \
+                html += '<div class="col-lg-3 col-md-4 col-6"><div class="d-block mb-4 h-100"><a href="#"><img class="img-fluid image" src="' + settings.MEDIA_URL + \
                     str(photo.picture) + '" alt="' + str(photo.picture.name) + \
-                    '" width="600"height="400"></a></div></div>'
-            html += '<br class="clear">'
+                    '"></a></div></div>'
             return HttpResponse(html)
         else:
             return JsonResponse({'error': True})
@@ -302,20 +322,3 @@ def logout(request, mydata):
     response = render(request, 'main.html')
     response.delete_cookie('auth_token')
     return response
-
-
-@auth_required
-def get_friend_list(request, mydata):
-    friends_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
-        from_user_id=mydata.id).values('to_user_id'))
-    friends_html = ''
-    for friend in friends_list:
-        friends_html += '<div style="display:inline">' + '<p class="status '
-        if friend.last_connection > timezone.now() - timedelta(seconds=30):
-            friends_html += 'available'
-        else:
-            friends_html += 'disconnected'
-        friends_html += '">•</p> ' + \
-            friend.name + ' ' + friend.surnames + '</div>'
-        friends_html += '<hr class="clear" style="margin-top:1px;margin-bottom:1px;">'
-    return HttpResponse(friends_html)

@@ -1,37 +1,37 @@
 $(document).ready(function () {
-    $('#search-button').click(function () {
-        find_user();
+    $('#search-user').bind("change paste keyup", function () {
+        if ($('#search-user').val().length == 0) {
+            $('#search-results').remove()
+        }
+        if ($('#search-user').val().length != 0) {
+            $('#loading').addClass('octicon octicon-sync rotate');
+            $('#loading').show();
+            setTimeout(findUsers, 500);
+        }
     });
 });
 
-function find_user() {
-    if ($('#search-user').val().length != 0) {
-        $('#search-button svg').addClass('octicon octicon-sync rotate');
-        $('#search-button').prop("disabled", true);
-        $('#search-button svg').show();
-        setTimeout(function () {
-            $.ajax({
-                url: "/find_users/" + $('#search-user').val(),
-                type: "GET",
-                cache: true,
-                dataType: 'html',
+function findUsers() {
+    $.ajax({
+        url: "/find_users/" + $('#search-user').val(),
+        type: "GET",
+        cache: true,
+        dataType: 'html',
 
-                success: function (html) {
-                    $('#search-results').remove()
-                    $('#search-users').after(html);
-                    $('#search-button svg').removeClass('rotate');
-                    $('#search-button svg').hide();
-                },
+        success: function (html) {
+            $('#search-results').remove()
+            $('#search-users').after(html);
+            $('#loading').removeClass('rotate');
+            $('#loading').hide();
+        },
 
-                error: function (xhr, errmsg, err) {
-                    $('#search_results').remove()
-                    $('#search-button svg').removeClass('rotate');
-                    $('#search-button svg').hide();
-                }
-            });
-        }, 2000);
-    }
-};
+        error: function (xhr, errmsg, err) {
+            $('#search_results').remove()
+            $('#loading').removeClass('rotate');
+            $('#loading').hide();
+        }
+    });
+}
 
 function acceptFriend(acceptbutton) {
     $.ajax({
@@ -49,6 +49,7 @@ function acceptFriend(acceptbutton) {
         }
     });
 }
+
 
 function rejectFriendRequestReceived(rejectreceivedrequestbutton) {
     $.ajax({
