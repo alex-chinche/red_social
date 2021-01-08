@@ -79,6 +79,7 @@ body {
     background-color: rgb(204, 245, 255);
     position: sticky;
     border-radius: 5px;
+    margin-right: 2px;
 }
 
 #navbar {
@@ -112,19 +113,19 @@ body {
 }
 
 #navbar .nav-option:hover {
-    background-image: linear-gradient(#772ffd, #d6aaff);
+    background-image: linear-gradient(#772ffd, #c588ff);
     color: white;
 }
 
 #navbar .active {
-    background-image: linear-gradient(#772ffd, #d6aaff);
+    background-image: linear-gradient(#772ffd, #c588ff);
     color: white;
     font-weight: bold;
 }
 
 #navbar .settings:hover, .nav-right-option:hover {
     display: block;
-    background-image: linear-gradient(#772ffd, #d6aaff);
+    background-image: linear-gradient(#772ffd, #c588ff);
     color: white;
 }
 
@@ -215,10 +216,6 @@ body {
     line-height: 22px;
 }
 
-.small {
-    font-size: 13px;
-}
-
 .large {
     font-size: 26px;
 }
@@ -266,13 +263,6 @@ body {
     border-radius: 50%;
 }
 
-.main-profile-pic {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
 .button-container {
     margin-left: auto;
     white-space: nowrap;
@@ -291,9 +281,21 @@ body {
     text-align: center;
 }
 
-.imagewrap {
+.main-image-div {
+    width: 200px;
+    height: 200px;
     display: inline-block;
     position: relative;
+}
+
+.main-image-div-sub {
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    border-radius: 50%;
 }
 
 .add-profile-pic {
@@ -303,6 +305,8 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
+    width: 25%;
+    height: 25%;
 }
 
 .add-profile-pic:hover {
@@ -349,11 +353,6 @@ body {
     opacity: .85;
 }
 
-.profile-picture-list {
-    background-color: rgba(129, 39, 202, 0.158);
-    border-radius: 15px;
-}
-
 .image {
     border: 1px solid rgb(80, 80, 80);
     transition: .3s;
@@ -372,11 +371,21 @@ form {
 .profile-option {
     color: white;
     background-color: rgb(71, 0, 138);
-    padding: 6px 7px;
+    padding: 4px 7px;
     transition: .4s;
     cursor: pointer;
     border-radius: 15px;
-    display: inline;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .profile-option {
+        font-size: 11px;
+    }
+    .main-image-div {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 .profile-option:hover {
@@ -424,4 +433,16 @@ hr {
     user-select: none;
     /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
+}
+
+.profile_link {
+    font-size: .9em;
+    color: #0f0094;
+}
+
+.profile_link:hover {
+    text-decoration-color: currentcolor;
+    text-decoration-style: solid;
+    text-decoration-line: underline;
+    color: #340061;
 }

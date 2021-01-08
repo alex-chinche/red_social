@@ -13,7 +13,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('pulse/', views.send_pulse, name='send_pulse'),
     # Profile section
-    path('profile/', views.profile, name='profile'),
+    path('myprofile/', views.myprofile, name='myprofile'),
     path('upload_profile_pic/',
          views.upload_profile_pic, name='upload_profile_pic'),
     path('upload_photo/',
@@ -23,6 +23,7 @@ urlpatterns = [
 
     # Messages section
     path('messages/', views.messages, name='messages'),
+
     # World section
     path('world/', views.world, name='world'),
     path('send_friend_request/<int:user_id>/',
@@ -37,6 +38,11 @@ urlpatterns = [
          views.find_users, name='find_users'),
     path('get_friend_list/',
          views.get_friend_list, name='get_friend_list'),
+    path('profile/<int:user_id>/',
+         views.profile, name='profile'),
+    path('get_user_photos/<int:user_id>/',
+         views.get_user_photos, name='get_user_photos'),
+
     # Logout
     path('logout/',
          views.logout, name='logout'),

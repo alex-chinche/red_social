@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#search-user').bind("change paste keyup", function () {
+    $('#search-user').bind("change paste keyup click", function () {
         if ($('#search-user').val().length == 0) {
             $('#search-results').remove()
         }

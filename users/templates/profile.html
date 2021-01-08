@@ -5,9 +5,9 @@
 
 {% block navbar %}
 <a class="nav-option" href="{% url 'home' %}">Home</a>
-<a class="nav-option active" href="{% url 'profile' %}">Profile</a>
+<a class="nav-option" href="{% url 'myprofile' %}">Profile</a>
 <a class="nav-option" href="{% url 'messages' %}">Messages</a>
-<a class="nav-option" href="{% url 'world' %}">World</a>
+<a class="nav-option active" href="{% url 'world' %}">World</a>
 {% endblock %}
 
 {% block body %}
@@ -16,48 +16,23 @@
     <div class="col-sm">
         <div class="container">
             <div class="centered" id="my_profile_data">
-                <div class="imagewrap">
-                    {% if mydata.profile_pic %}
-                    <img id="profile_pic" src="{{ MEDIA_URL }}{{ mydata.profile_pic }}" class="main-profile-pic">
+                <div class="main-image-div">
+                    {% if user.profile_pic %}
+                    <div class="main-image-div-sub" id="profile_main_image"
+                        style="background-image: url('{{ MEDIA_URL }}{{ user.profile_pic }}');">
+                        <img id="profile_pic" href="{{ MEDIA_URL }}{{ user.profile_pic }}">
+                    </div>
                     {% else %}
-                    <img id="profile_pic" src="{% static '/images/default-user.png' %}" class="main-profile-pic">
+                    <div class="main-image-div-sub" id="profile_main_image"
+                        style="background-image: url('/static/images/default-user.png')">
+                        <img id="profile_pic" href="{% static '/images/default-user.png' %}">
+                    </div>
                     {% endif %}
-                    <form id="add-profile-pic-form" enctype="multipart/form-data" action="#" method="POST">
-                        {% csrf_token %}
-                        <label for="profile-pick-upload" class="add-profile-pic">
-                            <svg viewBox="0 0 512 512" width="50" height="50">
-                                <path fill="currentColor"
-                                    d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z">
-                                </path>
-                            </svg>
-                        </label>
-                        <input id="profile-pick-upload" onchange='addProfilePick(this.form)' type="file"
-                            name="profile_pic" accept="image/*" style='display: none;' />
-                    </form>
                 </div>
-                <h2>{{ mydata.name }} {{ mydata.surnames }}</h2>
+                <h2>{{ user.name }} {{ user.surnames }}</h2>
             </div>
-            <div class="container">
-                <hr>
-                <form id="add-pic-form" enctype="multipart/form-data" action="#" method="POST">
-                    {% csrf_token %}
-                    <label for="pic-upload" class="profile-option">Upload photos <svg viewBox="0 0 16 16" width="18"
-                            height="18">
-                            <path
-                                d="M7 9H5l3-3l3 3H9v5H7V9zm5-4c0-.44-.91-3-4.5-3C5.08 2 3 3.92 3 6C1.02 6 0 7.52 0 9c0 1.53 1 3 3 3h3v-1.3H3c-1.62 0-1.7-1.42-1.7-1.7c0-.17.05-1.7 1.7-1.7h1.3V6c0-1.39 1.56-2.7 3.2-2.7c2.55 0 3.13 1.55 3.2 1.8v1.2H12c.81 0 2.7.22 2.7 2.2c0 2.09-2.25 2.2-2.7 2.2h-2V12h2c2.08 0 4-1.16 4-3.5C16 6.06 14.08 5 12 5z"
-                                fill="currentColor"></path>
-                        </svg>
-                    </label>
-                    <input id="pic-upload" onchange='addPick(this.form)' type="file" name="picture" accept="image/*"
-                        style='display: none;' />
-                </form>
-                <label class="profile-option" id="number-of-friends">Friends (0)</p>
-                </label>
-                <hr>
-            </div>
-            <div class="container">
-                <div id="profile-picture-list" class="row text-center text-lg-left">
-                </div>
+            <hr>
+            <div id="profile-picture-list" class="row text-center text-lg-left">
             </div>
         </div>
     </div>

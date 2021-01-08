@@ -66,8 +66,8 @@ def get_friend_list(request, mydata):
 
 
 @auth_required
-def profile(request, mydata):
-    return render(request, 'profile.html', {'mydata': mydata})
+def myprofile(request, mydata):
+    return render(request, 'myprofile.html', {'mydata': mydata})
 
 
 @auth_required
@@ -84,6 +84,30 @@ def world(request, mydata):
         friend_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
             from_user_id=mydata.id).values('to_user_id')).order_by('name')
     return render(request, 'world.html', {'mydata': mydata, 'users_list': users_list, 'friend_request_list': friend_request_list, 'friend_list': friend_list})
+
+
+@auth_required
+def profile(request, mydata, user_id):
+    user_profile = User.objects.get(id=user_id)
+    return render(request, 'profile.html', {'user': user_profile})
+
+
+@auth_required
+def get_user_photos(request, mydata, user_id):
+    if request.is_ajax():
+        if request.method == 'GET':
+            user_photos = Photo.objects.filter(
+                profile=User.objects.get(id=user_id).id)
+            html = ""
+            for photo in user_photos:
+                html += '<div class="col-lg-3 col-md-4 col-6"><div class="d-block mb-4 h-100"><a href="#"><img class="img-fluid image" src="' + settings.MEDIA_URL + \
+                    str(photo.picture) + '" alt="' + str(photo.picture.name) + \
+                    '"></a></div></div>'
+            return HttpResponse(html)
+        else:
+            return JsonResponse({'error': True})
+    else:
+        return redirect('/profile/' + user_id)
 
 
 @auth_required
@@ -149,12 +173,12 @@ def find_users(request, mydata, search_word):
             for user in users_found:
                 if user.profile_pic:
                     users_found_html += '<div class="search-result"><img src="' + settings.MEDIA_URL + \
-                        str(user.profile_pic) + '" class="small-profile-pic"> ' + '<p class="small text-centered">' + \
-                        user.name + " " + user.surnames + '</p><div class="button-container">'
+                        str(user.profile_pic) + '" class="small-profile-pic"> ' + '<a href="/profile/' + str(user.id) + '" class="profile_link text-centered">' + \
+                        user.name + " " + user.surnames + '</a><div class="button-container">'
                 else:
                     users_found_html += '<div class="search-result"><img src="' + static('images/default-user.png') + '" class="small-profile-pic"> ' + \
-                        '<p class="small text-centered">' + user.name + " " + \
-                        user.surnames + '</p><div class="button-container">'
+                        '<a href="/profile/' + str(user.id) + '" class="profile_link text-centered">' + user.name + " " + \
+                        user.surnames + '</a><div class="button-container">'
                 if user in friends:
                     users_found_html += '<p class="no-click-button right">Friend</p><br>'
                 elif user in requests_sent:
@@ -251,10 +275,11 @@ def login(request):
                     # Save token in cookies
                     encoded_token = encode_token(email, hashed_password)
                     readable_token = encoded_token.decode('UTF-8')
-
-                    return JsonResponse({'login': True, 'token': readable_token})
+                    response = HttpResponse('User logged')
+                    response.set_cookie('auth_token', readable_token)
+                    return response
                 except:
-                    return JsonResponse({'login': False})
+                    return HttpResponse('Error in log')
             else:
                 return JsonResponse({'login': False})
         else:
