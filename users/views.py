@@ -45,6 +45,25 @@ def send_pulse(request, mydata):
 
 
 @auth_required
+def get_friends(request, mydata):
+    friends_html = ''
+    friends_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
+        from_user_id=mydata.id).values('to_user_id')).order_by('name')
+    for friend in friends_list:
+        friends_html += '<div style="display:inline">'
+        if friend.profile_pic:
+            friends_html += '<img src="' + settings.MEDIA_URL + \
+                str(friend.profile_pic) + '" class="small-profile-pic"> '
+        else:
+            friends_html += '<img src = "' + static('images/default-user.png') + \
+                '" class = "small-profile-pic" > '
+        friends_html += '<a href="/profile/' + str(friend.id) + '" class="profile_link text-centered">' + \
+                        friend.name + " " + friend.surnames + '</a>'
+        friends_html += '<hr class="clear hr-no-margin">'
+    return JsonResponse({'friends': friends_html})
+
+
+@auth_required
 def get_friend_list(request, mydata):
     friends_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
         from_user_id=mydata.id).values('to_user_id')).order_by('name')
@@ -77,13 +96,7 @@ def messages(request, mydata):
 
 @auth_required
 def world(request, mydata):
-    users_list = User.objects.exclude(id=mydata.id)
-    for user in users_list:
-        friend_request_list = User.objects.filter(id__in=Friend_Request.objects.filter(
-            to_user_id=mydata.id).values('from_user_id')).order_by('name')
-        friend_list = User.objects.filter(id__in=mydata.friends.through.objects.filter(
-            from_user_id=mydata.id).values('to_user_id')).order_by('name')
-    return render(request, 'world.html', {'mydata': mydata, 'users_list': users_list, 'friend_request_list': friend_request_list, 'friend_list': friend_list})
+    return render(request, 'world.html')
 
 
 @auth_required
@@ -331,10 +344,12 @@ def get_my_photos(request, mydata):
         if request.method == 'GET':
             my_photos = Photo.objects.filter(profile=mydata.id)
             html = ""
+            html += '<div id="profile-picture-list" class="row text-center text-lg-left">'
             for photo in my_photos:
                 html += '<div class="col-lg-3 col-md-4 col-6"><div class="d-block mb-4 h-100"><a href="#"><img class="img-fluid image" src="' + settings.MEDIA_URL + \
                     str(photo.picture) + '" alt="' + str(photo.picture.name) + \
                     '"></a></div></div>'
+            html += '</div>'
             return HttpResponse(html)
         else:
             return JsonResponse({'error': True})

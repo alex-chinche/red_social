@@ -20,6 +20,9 @@ urlpatterns = [
          views.upload_photo, name='upload_photo'),
     path('get_my_photos/',
          views.get_my_photos, name='get_my_photos'),
+    path('get_friends/',
+         views.get_friends, name='get_friends'),
+
 
     # Messages section
     path('messages/', views.messages, name='messages'),

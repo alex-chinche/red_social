@@ -45,6 +45,10 @@
             </div>
             <hr>
             <div class="container">
+                <label class="profile-option" id="myPhotos" onclick="get_photos()">My photos</p>
+                </label>
+                <label class="profile-option" id="number-of-friends" onclick="get_friends(this)">Friends (0)</p>
+                </label>
                 <form id="add-pic-form" enctype="multipart/form-data" action="#" method="POST">
                     {% csrf_token %}
                     <label for="pic-upload" class="profile-option">Upload photos <svg viewBox="0 0 16 16" width="18"
@@ -57,14 +61,11 @@
                     <input id="pic-upload" onchange='addPick(this.form)' type="file" name="picture" accept="image/*"
                         style='display: none;' />
                 </form>
-                <label class="profile-option" id="myPhotos">My photos</p>
-                </label>
-                <label class="profile-option" id="number-of-friends">Friends (0)</p>
-                </label>
             </div>
             <hr>
-            <div id="profile-picture-list" class="row text-center text-lg-left">
+            <div class="container" id="content">
             </div>
+
         </div>
     </div>
 

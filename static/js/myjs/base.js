@@ -30,24 +30,11 @@ function sendPulse() {
     });
 }
 $(document).ready(function () {
-    window.onscroll = function () { myFunction() };
-    var navbar = document.getElementById("navbar");
-    var chatButton = document.getElementById("change-chat");
-    var sticky = navbar.offsetTop;
-    var stickchat = chatButton.offset
     sendPulse();
     getFriendList();
     $('#logout').click(function () {
         logout();
     });
-    function myFunction() {
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky")
-        } else {
-            navbar.classList.remove("sticky");
-        }
-    }
-
 
     function logout() {
         $.ajax({

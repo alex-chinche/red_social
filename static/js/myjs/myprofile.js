@@ -1,7 +1,5 @@
 
 function get_photos() {
-    $('#profile-picture-list').html('');
-
     $.ajax({
         url: "/get_my_photos/",
         type: "GET",
@@ -9,11 +7,28 @@ function get_photos() {
         dataType: 'html',
 
         success: function (html) {
-            $('#profile-picture-list').html(html);
+            $('#content').html(html);
         },
 
         error: function (xhr, errmsg, err) {
             console.log("ERROR TOMANDO FOTOS")
+        }
+    });
+}
+
+function get_friends() {
+    $.ajax({
+        url: "/get_friends/",
+        type: "GET",
+        cache: true,
+        dataType: 'json',
+
+        success: function (html) {
+            $('#content').html(html['friends']);
+        },
+
+        error: function (xhr, errmsg, err) {
+            console.log("ERROR")
         }
     });
 }
