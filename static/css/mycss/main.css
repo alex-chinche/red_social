@@ -71,8 +71,7 @@ body {
     font-size: 40px;
     font-family: 'Bookman', 'URW Bookman L', serif;
     font: bold;
-    color: rgba(10, 60, 150, 0.8);
-    text-shadow: 1px 3px 3px rgb(88, 17, 182), 0 0 0 rgb(55, 19, 122), 1px 4px 6px rgb(16, 134, 253);
+    color: rgba(57, 0, 150, 0.8);
 }
 
 .input {
@@ -141,6 +140,7 @@ body {
 .button {
     font: bold 12px Arial;
     padding: 3px 6px 3px 6px;
+    margin: 3px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -151,7 +151,7 @@ body {
     box-shadow: 2px 2px rgb(68, 68, 68);
     border-left: 1px solid #CCCCCC;
     background-color: rgb(212, 167, 255);
-    border-radius: 10px;
+    border-radius: 8px;
     display: inline-block;
 }
 
@@ -183,8 +183,6 @@ body {
 }
 
 .search {
-    padding: 12px;
-    width: 400px;
     display: flex;
     align-items: center;
     border-radius: 2px;
@@ -352,11 +350,11 @@ body {
 .image {
     border: 1px solid rgb(80, 80, 80);
     transition: .3s;
+    opacity: .9;
 }
 
 .image:hover {
-    transform: translate(-5px, -10px);
-    box-shadow: 3px 8px 5px #200e30;
+    opacity: 1;
     transition: .3s;
 }
 
@@ -390,6 +388,15 @@ form {
     .settings {
         padding: 6px 12px;
         font-size: 13px;
+    }
+    .photo_container {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 650.0001px) {
+    .photo_container {
+        width: 65%
     }
 }
 
@@ -443,4 +450,20 @@ hr {
     text-decoration-style: solid;
     text-decoration-line: underline;
     color: #340061;
+}
+
+.photo_container {
+    margin: auto;
+}
+
+.fill_width {
+    width: 100%;
+}
+
+.spaced {
+    margin: 5px 0;
+}
+
+.description_form {
+    display: none;
 }

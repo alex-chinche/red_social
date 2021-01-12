@@ -90,6 +90,17 @@ def myprofile(request, mydata):
 
 
 @auth_required
+def delete_photo(request, mydata, id_photo):
+    if request.is_ajax():
+        my_photo = Photo.objects.get(id=id_photo, profile=mydata.id)
+        my_photo.picture.delete(save=True)
+        my_photo.delete()
+        return JsonResponse({'error': False})
+    else:
+        return redirect('/myprofile/')
+
+
+@auth_required
 def messages(request, mydata):
     return render(request, 'messages.html', {'mydata': mydata})
 
@@ -207,7 +218,7 @@ def find_users(request, mydata, search_word):
                     users_found_html += '<a class="button right" href="#" data-requesttosendid="' + \
                         str(user.id) + \
                         '" onclick="sendFriendRequest(this)">Send request</a><br>'
-                users_found_html += '</div></div><hr style="clear:both;">'
+                users_found_html += '</div></div><br style="clear:both;">'
             return HttpResponse(users_found_html)
         else:
             users_found_html += '<p>No results found containing "' + search_word + '"</p></div>'
@@ -346,7 +357,7 @@ def get_my_photos(request, mydata):
             html = ""
             html += '<div id="profile-picture-list" class="row text-center text-lg-left">'
             for photo in my_photos:
-                html += '<div class="col-lg-3 col-md-4 col-6"><div class="d-block mb-4 h-100"><a href="#"><img class="img-fluid image" src="' + settings.MEDIA_URL + \
+                html += '<div class="col-lg-3 col-md-4 col-6"><div class="d-block mb-4 h-100"><a href="/photo/' + str(photo.id) + '"><img class="img-fluid image" src="' + settings.MEDIA_URL + \
                     str(photo.picture) + '" alt="' + str(photo.picture.name) + \
                     '"></a></div></div>'
             html += '</div>'
@@ -362,3 +373,9 @@ def logout(request, mydata):
     response = render(request, 'main.html')
     response.delete_cookie('auth_token')
     return response
+
+
+@auth_required
+def photo_screen(request, mydata, id_photo):
+    photo = Photo.objects.get(id=id_photo, profile=mydata.id)
+    return render(request, 'photo_screen.html', {'photo': photo})

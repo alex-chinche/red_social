@@ -18,7 +18,7 @@ function get_user_photos(id) {
                 $('#profile-picture-list').html(html);
             }
             else {
-                $('#profile-picture-list').html("<p>No photos uploaded by the user yet!</p>");
+                $('#profile-picture-list').html("<p>No photos uploaded by this user yet!</p>");
             }
         },
 

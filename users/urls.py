@@ -22,6 +22,10 @@ urlpatterns = [
          views.get_my_photos, name='get_my_photos'),
     path('get_friends/',
          views.get_friends, name='get_friends'),
+    path('photo/<int:id_photo>',
+         views.photo_screen, name='photo_screen'),
+    path('delete_photo/<int:id_photo>',
+         views.delete_photo, name='delete_photo'),
 
 
     # Messages section

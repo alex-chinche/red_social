@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block navbar %}
+<a class="nav-option" href="{% url 'home' %}">Home</a>
+<a class="nav-option active" href="{% url 'myprofile' %}">Profile</a>
+<a class="nav-option" href="{% url 'messages' %}">Messages</a>
+<a class="nav-option" href="{% url 'world' %}">World</a>
+{% endblock %}
+
+{% block body %}
+<br class="clear">
+<div class="row">
+    <div class="col-sm">
+        <div class="container">
+            <div class="photo_container">
+                <img class="fill_width spaced" src="{{ MEDIA_URL }}{{photo.picture }}">
+                <div class="right" id="photo_options">
+                    <label class="profile-option noselect" id="change_description">Change description</p>
+                    </label>
+                    <label class="profile-option noselect" data-toggle="modal" data-target="#exampleModalCenter">Delete
+                        </p>
+                    </label>
+                </div>
+                <form class="fill_width description_form" id="description_form" method="POST">
+                    {% csrf_token %}
+                    <input class="fill_width spaced" type="text" placeholder="set description...">
+                    <label class="button right" id="hide_description">Cancel</label>
+                    <label class="button right">Add description</label>
+                </form>
+                <hr class="clear">
+                <div class="comments_box">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal to ensure the photo has been removed -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <br>
+                    Are you sure you want to delete this image?
+                    <br>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="delete_photo_button" onclick="delete_photo()"
+                        data-photoid="{{ photo.id }}" class="button"><svg class="icon-loading octicon octicon-sync"
+                            id="loading" viewBox="0 0 16 16" width="18" height="18" style="display: none;">
+                            <path fill-rule="evenodd"
+                                d="M8 2.5a5.487 5.487 0 00-4.131 1.869l1.204 1.204A.25.25 0 014.896 6H1.25A.25.25 0 011 5.75V2.104a.25.25 0 01.427-.177l1.38 1.38A7.001 7.001 0 0114.95 7.16a.75.75 0 11-1.49.178A5.501 5.501 0 008 2.5zM1.705 8.005a.75.75 0 01.834.656 5.501 5.501 0 009.592 2.97l-1.204-1.204a.25.25 0 01.177-.427h3.646a.25.25 0 01.25.25v3.646a.25.25 0 01-.427.177l-1.38-1.38A7.001 7.001 0 011.05 8.84a.75.75 0 01.656-.834z"
+                                fill="currentColor">
+                            </path>
+                        </svg> Delete
+                        permanently</button>
+                    <button type="button" class="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block scripts %}
+    <script src="{% static 'js/myjs/photo_screen.js' %}"></script>
+    {% endblock %}

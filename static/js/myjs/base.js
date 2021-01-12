@@ -1,5 +1,7 @@
+/*
 setInterval(sendPulse, 10000);
 setInterval(getFriendList, 10000);
+*/
 
 function getFriendList() {
     $.ajax({

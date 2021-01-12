@@ -55,3 +55,4 @@ class Friend_Request(models.Model):
 class Photo(models.Model):
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to=get_custom_images_path)
+    description = models.CharField(max_length=100, blank=True)
